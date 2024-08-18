@@ -2,8 +2,8 @@ int startBT = 2;
 int resetBT = 3;
 int ledst = 8;
 int ledre = 9;
-int ststate;
-int restate;
+int ststate = LOW;
+int restate = LOW;
 int gaspin = 0;
 
 void setup() {
@@ -23,12 +23,11 @@ void loop() {
       int v1 = analogRead(gaspin);
       float v2 = v1 * (5.0 / 1024);
       Serial.println(v2);
-      delay(500);
+      delay(200);
     }
     ststate = LOW;
     Serial.println("reset");
     digitalWrite(ledst, ststate);
     delay(200);
-
   }
 }
