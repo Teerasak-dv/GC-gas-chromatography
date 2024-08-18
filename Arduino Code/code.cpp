@@ -4,7 +4,7 @@ int ledst = 8;
 int ledre = 9;
 int ststate;
 int restate;
-const int gaspin = 0;
+int gaspin = 0;
 
 void setup() {
   Serial.begin(9600);
@@ -19,15 +19,16 @@ void loop() {
     ststate = HIGH;
     Serial.println("start");
     digitalWrite(ledst, ststate);
-    while(digitalRead(resetBT) == LOW) {
+    while(digitalRead(resetBT) != LOW) {
       int v1 = analogRead(gaspin);
       float v2 = v1 * (5.0 / 1024);
       Serial.println(v2);
+      delay(500);
     }
-  }
-  ststate = LOW;
-  Serial.println("reset");
-  digitalWrite(ledst, ststate);
-  delay(200);
+    ststate = LOW;
+    Serial.println("reset");
+    digitalWrite(ledst, ststate);
+    delay(200);
 
+  }
 }
