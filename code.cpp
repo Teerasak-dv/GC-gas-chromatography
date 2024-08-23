@@ -21,8 +21,9 @@ void loop() {
     digitalWrite(ledst, ststate);
     while(digitalRead(resetBT) != LOW) {
       int v1 = analogRead(gaspin);
-      float v2 = v1 * (5.0 / 1024);
-      Serial.println(v2);
+
+      float v3 = v1 * (5.0 / 1024);
+      Serial.println(v3);
       delay(200);
     }
     ststate = LOW;
@@ -31,3 +32,4 @@ void loop() {
     delay(200);
   }
 }
+
