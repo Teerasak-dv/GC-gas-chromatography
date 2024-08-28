@@ -23,7 +23,7 @@ void loop() {
       int v1 = analogRead(gaspin);
       float v2 = v1 * (5.0 / 1024);
       Serial.println(v2);
-      delay(200);
+      delay(1000);
     }
     ststate = LOW;
     Serial.println("reset");
@@ -31,4 +31,3 @@ void loop() {
     delay(200);
   }
 }
-
