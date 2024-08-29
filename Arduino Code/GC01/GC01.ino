@@ -8,6 +8,7 @@ int gaspin = 0;
 float r1 = 100000;
 float r2 = 10000;
 float vp = 1.7;
+float sum = 0.0;
 
 void setup() {
   Serial.begin(9600);
@@ -25,7 +26,11 @@ void loop() {
     while(digitalRead(resetBT) != LOW) {
       float v = (analogRead(0) * 5) / 1024.0;
       Serial.println(v);
-      delay(200);
+      if(v >= 0.5){
+        sum = sum + v;
+        Serial.print( sum);
+        }
+      delay(100);
     }
     ststate = LOW;
     Serial.println("reset");
