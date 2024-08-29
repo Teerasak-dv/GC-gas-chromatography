@@ -29,11 +29,12 @@ void loop() {
       if(v >= 0.5){
         sum = sum + v;
         }
-      delay(100);
+      delay(150);
       }
     ststate = LOW;
     Serial.print("reset Sum = ");
     Serial.println(sum);
+    sum = 0.0;
     digitalWrite(ledst, ststate);
     delay(200);
   }
