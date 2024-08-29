@@ -6,11 +6,6 @@ float ts = 0;
 void setup() {
 
 Serial.begin(9600);
-Serial.println("CLEARDATA");
-Serial.println("LABEL");
-Serial.println("RESETTIMER");
-
-Serial.println((int) (vp / (r2 / (r1 + r2))));
 
 delay(1000);
 }
