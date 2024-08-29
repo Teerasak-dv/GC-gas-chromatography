@@ -1,4 +1,4 @@
-float vp = 1.7;
+float vp = 1;
 float r1 = 100000;
 float r2 = 10000;
 float ts = 0;
