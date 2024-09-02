@@ -5,9 +5,6 @@ int ledre = 9;
 int ststate = LOW;
 int restate = LOW;
 int gaspin = 0;
-float r1 = 100000;
-float r2 = 10000;
-float vp = 1.7;
 float sum = 0.0;
 
 void setup() {
@@ -26,10 +23,10 @@ void loop() {
     while(digitalRead(resetBT) != LOW) {
       float v = (analogRead(0) * 5) / 1024.0;
       Serial.println(v);
-      if(v >= 0.5){
+      if(v >= 0.2){
         sum = sum + v;
         }
-      delay(200);
+      delay(400);
       }
     ststate = LOW;
     Serial.print("reset Sum = ");
