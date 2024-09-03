@@ -23,17 +23,18 @@ void setup() {
   pinMode(rx, INPUT);
   pinMode(tx, OUTPUT);
   Serial.println("CLEARDATA");
-  Serial.println("VARIABLE");
+  Serial.println("LABEL,CLOCK,TIME,VARIABLE");
 }
 
 void loop() {
   if(digitalRead(startBT) == LOW && ststate != HIGH) {
+    Serial.println("RESETTIMER");
     ststate = HIGH;
     Serial.println("start");
     digitalWrite(ledst, ststate);
     while(digitalRead(resetBT) != LOW) {
       float v = (analogRead(0) * 5) / 1024.0;
-      Serial.print("DATA");
+      Serial.print("DATA,TIME,TIMER,");
       Serial.println(v);
       if(v >= 0.2){
         sum = sum + v;
