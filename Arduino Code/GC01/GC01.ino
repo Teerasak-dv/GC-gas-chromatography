@@ -37,7 +37,7 @@ void loop() {
       if(v >= 0.2){
         sum = sum + v;
         }
-      delay(400);
+      delay(500);
       }
     ststate = LOW;
     Serial.print("reset Sum = ");
