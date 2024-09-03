@@ -33,6 +33,7 @@ void loop() {
     digitalWrite(ledst, ststate);
     while(digitalRead(resetBT) != LOW) {
       float v = (analogRead(0) * 5) / 1024.0;
+      Serial.print("DATA");
       Serial.println(v);
       if(v >= 0.2){
         sum = sum + v;
@@ -40,8 +41,8 @@ void loop() {
       delay(500);
       }
     ststate = LOW;
-    Serial.print("reset Sum = ");
-    Serial.println(sum);
+    //Serial.print("reset Sum = ");
+    //Serial.println(sum);
     sum = 0.0;
     digitalWrite(ledst, ststate);
     delay(200);
