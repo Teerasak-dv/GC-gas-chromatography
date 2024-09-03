@@ -30,7 +30,6 @@ void loop() {
   if(digitalRead(startBT) == LOW && ststate != HIGH) {
     ststate = HIGH;
     Serial.println("start");
-    bt.println("start");
     digitalWrite(ledst, ststate);
     while(digitalRead(resetBT) != LOW) {
       float v = (analogRead(0) * 5) / 1024.0;
