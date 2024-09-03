@@ -9,13 +9,10 @@ float sum = 0.0;
 
 void setup() {
   Serial.begin(9600);
-  bt.begin(9600);
   pinMode(ledst, OUTPUT);
   pinMode(ledre, OUTPUT);
   pinMode(startBT, INPUT);
   pinMode(resetBT, INPUT);
-  pinMode(rx, INPUT);
-  pinMode(tx, OUTPUT);
 }
 
 void loop() {
