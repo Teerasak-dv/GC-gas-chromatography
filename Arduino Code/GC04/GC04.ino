@@ -37,7 +37,7 @@ void bt() {
     if(v >= 0.2){
       sum = sum + v;
     }
-    delay(500);
+    delay(1000);
   }
   ststate = 0;
   bt.print("reset Sum = ");
@@ -56,19 +56,19 @@ void loop() {
   }
   else {
     Serial.println("RESETTIMER");
-    ststate = HIGH;
+    ststate = 1;
     Serial.println("start");
     digitalWrite(ledst, ststate);
-    while(digitalRead(resetBT) != LOW) {
+    while(digitalRead(resetBT) != 0) {
       float v = (analogRead(0) * 5) / 1024.0;
       Serial.print("DATA,TIME,TIMER,");
       Serial.println(v);
       if(v >= 0.2){
         sum = sum + v;
         }
-      delay(500);
+      delay(1000);
       }
-    ststate = LOW;
+    ststate = 0;
     Serial.print("reset Sum = ");
     Serial.println(sum);
     sum = 0.0;
