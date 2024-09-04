@@ -7,11 +7,9 @@ int ststate = LOW;
 int restate = LOW;
 int gaspin = 0;
 float sum = 0.0;
-int rx = 0;
-int tx = 1;
 int BTpress = 0;
 
-SoftwareSerial bt = SoftwareSerial(rx, tx);
+SoftwareSerial bt = SoftwareSerial(0, 1);
 
 void setup() {
   Serial.begin(9600);
@@ -19,8 +17,8 @@ void setup() {
   pinMode(ledst, OUTPUT);
   pinMode(startBT, INPUT);
   pinMode(resetBT, INPUT);
-  pinMode(rx, INPUT);
-  pinMode(tx, OUTPUT);
+  pinMode(0, INPUT);
+  pinMode(1, OUTPUT);
   Serial.println("CLEARDATA");
   Serial.println("LABEL,CLOCK,TIME,VARIABLE");
 }
@@ -35,10 +33,10 @@ void bt() {
     bt.print("DATA,TIME,TIMER,");
     bt.println(v);
     if(v >= 0.2){
-      sum = sum + v;
+      sum += v;
     }
     delay(1000);
-    statate = !ststate;
+    ststate = !ststate;
     digitalWrite(ledst, ststate);
   }
   bt.print("reset Sum = ");
@@ -64,7 +62,7 @@ void loop() {
       Serial.print("DATA,TIME,TIMER,");
       Serial.println(v);
       if(v >= 0.2){
-        sum = sum + v;
+        sum += v;
         }
       delay(1000);
       }
