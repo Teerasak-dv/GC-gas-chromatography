@@ -76,27 +76,3 @@ void loop() {
     delay(200);
   }
 }
-/*void loop() {
-  if(digitalRead(startBT) == LOW && ststate != HIGH) {
-    Serial.println("RESETTIMER");
-    ststate = HIGH;
-    Serial.println("start");
-    digitalWrite(ledst, ststate);
-    while(digitalRead(resetBT) != LOW) {
-      float v = (analogRead(0) * 5) / 1024.0;
-      Serial.print("DATA,TIME,TIMER,");
-      Serial.println(v);
-      if(v >= 0.2){
-        sum = sum + v;
-        }
-      delay(500);
-      }
-    ststate = LOW;
-    //Serial.print("reset Sum = ");
-    //Serial.println(sum);
-    sum = 0.0;
-    digitalWrite(ledst, ststate);
-    delay(200);
-  }
-}
-*/
