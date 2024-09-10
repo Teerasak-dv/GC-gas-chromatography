@@ -7,7 +7,7 @@ int ststate = LOW;
 int restate = LOW;
 int gaspin = 0;
 float sum = 0.0;
-int BTpress, press;
+int BTpress, press1;
 int period = 500;
 
 SoftwareSerial bt = SoftwareSerial(0, 1);
@@ -15,7 +15,7 @@ SoftwareSerial bt = SoftwareSerial(0, 1);
 void setup() {
   Serial.begin(9600);
   bt.begin(9600);
-  press = millis();
+  press1 = millis();
   pinMode(ledst, OUTPUT);
   pinMode(startBT, INPUT);
   pinMode(resetBT, INPUT);
@@ -27,36 +27,41 @@ void setup() {
 
 void bto() {
   bt.println("RESETTIMER");
-  bt.println("start");
-  while(digitalRead(resetBT) != 0) {
-    ststate = !ststate;
-    digitalWrite(ledst, ststate);
-    float v = (analogRead(0) * 5) / 1024.0;
-    bt.print("DATA,TIME,TIMER,");
-    bt.println(v);
-    if(v >= 0.2){
-      sum += v;
+  while(digitalRead(resetBT) == 0){
+    bt.println("start");
+    if(startBT == 0){
+      while(digitalRead(resetBT) == 0) {
+        ststate = !ststate;
+        digitalWrite(ledst, ststate);
+        float v = (analogRead(0) * 5) / 1024.0;
+        bt.print("DATA,TIME,TIMER,");
+        bt.println(v);
+        if(v >= 0.2){
+          sum += v;
+        }
+        delay(1000);
+      }
+      bt.print("reset Sum = ");
+      bt.println(sum);
+      sum = 0.0;
+      delay(200);
     }
-    delay(1000);
     ststate = !ststate;
     digitalWrite(ledst, ststate);
+    delay(500);
   }
-  bt.print("reset Sum = ");
-  bt.println(sum);
-  sum = 0.0;
-  delay(200);
 }
 
 void loop() {
   if(digitalRead(startBT) == 0 && ststate == 0) {
     BTpress = millis();
-    press = BTpress;
+    press1 = BTpress;
     while(digitalRead(startBT) == 0 && ststate == 0){
       BTpress = millis();
        Serial.println(BTpress);
-      delay(500);
+       delay(500);
     }
-    if(BTpress - press >= period){
+    if(BTpress - press1 >= period){
       bto();
     }
     Serial.println("RESETTIMER");
