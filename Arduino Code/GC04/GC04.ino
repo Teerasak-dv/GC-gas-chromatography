@@ -27,15 +27,16 @@ void setup() {
 
 void bto() {
   bt.println("RESETTIMER");
-  while(digitalRead(resetBT) == 0){
+  while(digitalRead(resetBT) != 0){
     bt.println("start");
     if(startBT == 0){
-      while(digitalRead(resetBT) == 0) {
-        ststate = !ststate;
+      while(digitalRead(resetBT) != 0) {
+        ststate = 1;
         digitalWrite(ledst, ststate);
         float v = (analogRead(0) * 5) / 1024.0;
         bt.print("DATA,TIME,TIMER,");
         bt.println(v);
+        Serial.println("Test");
         if(v >= 0.2){
           sum += v;
         }
