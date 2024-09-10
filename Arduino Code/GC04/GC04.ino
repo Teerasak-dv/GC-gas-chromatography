@@ -28,8 +28,9 @@ void setup() {
 void bto() {
   bt.println("RESETTIMER");
   while(digitalRead(resetBT) != 0){
-    bt.println("start");
-    if(startBT == 0){
+    if(digitalRead(startBT) == 0){
+      bt.println("start");
+      Serial.println("Test3");
       while(digitalRead(resetBT) != 0) {
         ststate = 1;
         digitalWrite(ledst, ststate);
@@ -42,15 +43,15 @@ void bto() {
         }
         delay(1000);
       }
-      bt.print("reset Sum = ");
-      bt.println(sum);
-      sum = 0.0;
-      delay(200);
     }
+    Serial.println("Test2");
     ststate = !ststate;
     digitalWrite(ledst, ststate);
     delay(500);
   }
+  bt.print("reset Sum = ");
+  bt.println(sum);
+  sum = 0.0;
 }
 
 void loop() {
@@ -65,24 +66,26 @@ void loop() {
     if(BTpress - press1 >= period){
       bto();
     }
-    Serial.println("RESETTIMER");
-    ststate = 1;
-    Serial.println("start");
-    digitalWrite(ledst, ststate);
-    while(digitalRead(resetBT) != 0) {
-      float v = (analogRead(0) * 5) / 1024.0;
-      Serial.print("DATA,TIME,TIMER,");
-      Serial.println(v);
-      if(v >= 0.2){
-        sum += v;
+    else {
+      Serial.println("RESETTIMER");
+      ststate = 1;
+      Serial.println("start");
+      digitalWrite(ledst, ststate);
+      while(digitalRead(resetBT) != 0) {
+        float v = (analogRead(0) * 5) / 1024.0;
+        Serial.print("DATA,TIME,TIMER,");
+        Serial.println(v);
+        if(v >= 0.2){
+          sum += v;
+          }
+        delay(1000);
         }
-      delay(1000);
-      }
-    ststate = 0;
-    Serial.print("reset Sum = ");
-    Serial.println(sum);
-    sum = 0.0;
-    digitalWrite(ledst, ststate);
-    delay(200);
+      ststate = 0;
+      Serial.print("reset Sum = ");
+      Serial.println(sum);
+      sum = 0.0;
+      digitalWrite(ledst, ststate);
+      delay(200);
+    }
     }
 }
