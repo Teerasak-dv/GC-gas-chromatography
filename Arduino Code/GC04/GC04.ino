@@ -57,9 +57,26 @@ void loop() {
       delay(500);
     }
     if(BTpress - press >= period){
-      Serial.println("Hello");
-      Serial.println(press);
+      bto();
     }
-    delay(500);
-  }
+    Serial.println("RESETTIMER");
+    ststate = 1;
+    Serial.println("start");
+    digitalWrite(ledst, ststate);
+    while(digitalRead(resetBT) != 0) {
+      float v = (analogRead(0) * 5) / 1024.0;
+      Serial.print("DATA,TIME,TIMER,");
+      Serial.println(v);
+      if(v >= 0.2){
+        sum += v;
+        }
+      delay(1000);
+      }
+    ststate = 0;
+    Serial.print("reset Sum = ");
+    Serial.println(sum);
+    sum = 0.0;
+    digitalWrite(ledst, ststate);
+    delay(200);
+    }
 }
