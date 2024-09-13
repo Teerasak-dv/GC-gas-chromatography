@@ -10,7 +10,7 @@ float sum = 0.0;
 int BTpress, press1;
 int period = 500;
 
-SoftwareSerial bt = SoftwareSerial(0, 1);
+SoftwareSerial bt = SoftwareSerial(11, 12);
 
 void setup() {
   Serial.begin(9600);
